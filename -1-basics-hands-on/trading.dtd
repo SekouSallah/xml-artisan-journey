@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!ELEMENT Order (Header, Customer, Items, Payment, Shipping, Summary) >
+
+        <!ELEMENT Header (OrderId, OrderDate, Status) >
+        <!ELEMENT OrderId (#PCDATA) >
+        <!ELEMENT OrderDate (#PCDATA) >
+        <!ELEMENT Status (#PCDATA) >
+
+        <!ELEMENT Customer (Name, Email, Phone, Address) >
+        <!ELEMENT Name (#PCDATA) >
+        <!ELEMENT Email (#PCDATA) >
+        <!ELEMENT Phone (#PCDATA) >
+        <!ELEMENT Address (#PCDATA) >
+        <!ATTLIST Customer customerType (Business | Government | Merchant) "Business">
+        <!ATTLIST Address country CDATA #REQUIRED
+                postalCode NMTOKEN #REQUIRED
+                >
+
+        <!ELEMENT Items (Item+) >
+        <!ELEMENT Item (Description, Quantity, UnitPrice) >
+        <!ATTLIST Item id ID #REQUIRED>
+
+        <!ELEMENT Description (#PCDATA) >
+
+        <!ELEMENT Quantity (#PCDATA) >
+        <!ATTLIST Quantity unit CDATA #REQUIRED>
+
+        <!ELEMENT UnitPrice (#PCDATA) >
+        <!ATTLIST UnitPrice currency (XOF | EUR | USD) "EUR">
+
+        <!ELEMENT Payment (Account, BankCode, Validated) >
+        <!ATTLIST Payment method (BANK_TRANSFER | VISA | PAYPAL) "BANK_TRANSFER" >
+
+        <!ELEMENT Account (#PCDATA) >
+        <!ELEMENT BankCode (#PCDATA) >
+        <!ELEMENT Validated (#PCDATA) >
+
+        <!ELEMENT Shipping (Mode, Carrier, EstimatedDelivery) >
+        <!ELEMENT Mode (#PCDATA) >
+        <!ELEMENT Carrier (#PCDATA) >
+        <!ELEMENT EstimatedDelivery (#PCDATA) >
+
+        <!ELEMENT Summary EMPTY >
+        <!ATTLIST Summary totalAmount CDATA #REQUIRED
+                currency (XOF | EUR | USD) "EUR"
+                discount CDATA #REQUIRED
+                >
