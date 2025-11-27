@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="trading.xsd">
+    <Header>
+        <OrderId>ORD-2025-001</OrderId>
+        <OrderDate>2025-11-02</OrderDate>
+        <Status>VALIDATED</Status>
+    </Header>
+
+    <Customer customerType="Business">
+        <Name>AJECASH Import-Export</Name>
+        <Email>contact@ajecash.org</Email>
+        <Phone>+22370000000</Phone>
+        <Address country="ML" postalCode="BKO1000">Bamako, Mali</Address>
+    </Customer>
+
+    <Items>
+        <Item id="P001">
+            <Description>Ordinateur portable HP EliteBook</Description>
+            <Quantity unit="pcs">5</Quantity>
+            <UnitPrice currency="USD">1200.50</UnitPrice>
+        </Item>
+        <Item id="P002">
+            <Description>Disque SSD 1To Samsung</Description>
+            <Quantity unit="pcs">10</Quantity>
+            <UnitPrice currency="USD">95.99</UnitPrice>
+        </Item>
+    </Items>
+
+    <Payment method="BANK_TRANSFER">
+        <Account>ML11000123456789012345</Account>
+        <BankCode>MLCBMLBA</BankCode>
+        <Validated>true</Validated>
+    </Payment>
+
+    <Shipping>
+        <Mode>SEA</Mode>
+        <Carrier>Maersk</Carrier>
+        <EstimatedDelivery>2025-12-20</EstimatedDelivery>
+    </Shipping>
+
+    <Summary totalAmount="8054.50" currency="USD" discount="2.45"/>
+</Order>

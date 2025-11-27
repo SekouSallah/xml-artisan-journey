@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="Order" type="OrderType"></xsd:element>
+
+    <xsd:complexType name="OrderType">
+        <xsd:sequence>
+            <xsd:element name="Header" type="OrderHeader"/>
+            <xsd:element name="Customer" type="OrderCustomer"/>
+            <xsd:element name="Items" type="OrderItems"/>
+            <xsd:element name="Payment" type="OrderPayment"/>
+            <xsd:element name="Shipping" type="OrderShipping"/>
+            <xsd:element name="Summary" type="OrderSummary"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderHeader">
+        <xsd:sequence>
+            <xsd:element name="OrderId" type="xsd:string"/>
+            <xsd:element name="OrderDate" type="xsd:date"/>
+            <xsd:element name="Status" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderCustomer">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"></xsd:element>
+            <xsd:element name="Email" type="CustomerEmailType"></xsd:element>
+            <xsd:element name="Phone" type="xsd:string"></xsd:element>
+            <xsd:element name="Address" type="CustomerAddressType"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="customerType" type="OrderCustomerType" default="Merchant"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderItems">
+        <xsd:sequence maxOccurs="unbounded">
+            <xsd:element name="Item" type="OrderItem"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderPayment">
+        <xsd:sequence>
+            <xsd:element name="Account" type="xsd:NMTOKEN"></xsd:element>
+            <xsd:element name="BankCode" type="xsd:NMTOKEN"></xsd:element>
+            <xsd:element name="Validated" type="xsd:boolean" default="false"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="method" type="OrderPaymentType" default="PAYPAL"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderShipping">
+        <xsd:sequence>
+            <xsd:element name="Mode" type="xsd:string"></xsd:element>
+            <xsd:element name="Carrier" type="xsd:string"></xsd:element>
+            <xsd:element name="EstimatedDelivery" type="xsd:date"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderSummary">
+        <xsd:attribute name="totalAmount" type="xsd:double" use="required"></xsd:attribute>
+        <xsd:attribute name="currency" type="OrderCurrencyType" default="XOF"></xsd:attribute>
+        <xsd:attribute name="discount" type="xsd:double" default="0.00"></xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="OrderItem">
+        <xsd:sequence>
+            <xsd:element name="Description" type="xsd:string"></xsd:element>
+            <xsd:element name="Quantity" type="OrderItemQuantity"></xsd:element>
+            <xsd:element name="UnitPrice" type="OrderItemUnitPrice"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderItemUnitPrice">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:double">
+                <xsd:attribute name="currency" type="OrderCurrencyType" default="XOF"></xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="OrderItemQuantity">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:double">
+                <xsd:attribute name="unit" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="OrderCurrencyType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="XOF"/>
+            <xsd:enumeration value="EUR"/>
+            <xsd:enumeration value="USD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OrderCustomerType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Merchant"/>
+            <xsd:enumeration value="Government"/>
+            <xsd:enumeration value="Business"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OrderPaymentType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PAYPAL"/>
+            <xsd:enumeration value="BANK_TRANSFER"/>
+            <xsd:enumeration value="VISA"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="CustomerAddressType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="country" type="xsd:string" use="required"/>
+                <xsd:attribute name="postalCode" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CustomerEmailType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[^@]+@[^.]+..+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
