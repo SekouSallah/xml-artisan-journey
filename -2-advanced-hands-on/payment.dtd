@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Payments (CardPayment | CryptoPayment)+>
+<!ELEMENT CardPayment (Amount, CardNumber) >
+<!ELEMENT Amount (#PCDATA) >
+<!ELEMENT CardNumber (#PCDATA) >
+<!ELEMENT CryptoPayment (Amount, Wallet) >
+<!ELEMENT Wallet (#PCDATA) >
+<!ATTLIST CardPayment id ID #REQUIRED >
+<!ATTLIST CryptoPayment id ID #REQUIRED >

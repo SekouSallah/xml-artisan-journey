@@ -59,6 +59,7 @@
         <xsd:attribute name="currency" type="OrderCurrencyType" default="XOF"/>
         <xsd:attribute name="discount" type="xsd:double" default="0.00"/>
     </xsd:complexType>
+
     <xsd:complexType name="OrderItem">
         <xsd:sequence>
             <xsd:element name="Description" type="xsd:string"/>

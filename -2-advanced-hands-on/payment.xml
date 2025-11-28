@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Payments SYSTEM "payment.dtd">
+<Payments>
+    <CardPayment id="P001">
+        <Amount>100.00</Amount>
+        <CardNumber>4111111111111111</CardNumber>
+    </CardPayment>
+    <CryptoPayment id="P002">
+        <Amount>0.05</Amount>
+        <Wallet>bc1qxyz...</Wallet>
+    </CryptoPayment>
+</Payments>
