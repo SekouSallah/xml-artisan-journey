@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="Payments">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Payment" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="Payment" abstract="true"/>
+    <xsd:element name="CardPayment" substitutionGroup="Payment" type="CardPaymentType"/>
+    <xsd:element name="CryptoPayment" substitutionGroup="Payment" type="CryptoPaymentType"/>
+
+    <xsd:complexType name="CardPaymentType">
+        <xsd:sequence>
+            <xsd:element name="Amount" type="xsd:double"/>
+            <xsd:element name="CardNumber" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="CryptoPaymentType">
+        <xsd:sequence>
+            <xsd:element name="Amount" type="xsd:double"/>
+            <xsd:element name="Wallet" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute type="xsd:ID" name="id" use="required"/>
+    </xsd:complexType>
+
+</xsd:schema>
